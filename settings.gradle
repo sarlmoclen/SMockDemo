@@ -1,0 +1,3 @@
+rootProject.name='SMockDemo'
+include ':app'
+include ':smock'
