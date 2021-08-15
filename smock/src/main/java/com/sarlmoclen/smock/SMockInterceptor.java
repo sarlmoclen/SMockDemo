@@ -14,18 +14,18 @@ public class SMockInterceptor {
   private static final String DOUBLE = "double";
   private static final String BOOLEAN = "boolean";
   private static final String CHAR = "char";
-  private List<OngoingStubbing> recordedInvocationDetails;
+  private List<OngoingStubbing> ongoingStubbingList;
 
-  public SMockInterceptor(List<OngoingStubbing> recordedInvocationDetails) {
-    this.recordedInvocationDetails = recordedInvocationDetails;
+  public SMockInterceptor(List<OngoingStubbing> ongoingStubbingList) {
+    this.ongoingStubbingList = ongoingStubbingList;
   }
 
   public Object invoke(Object mock, Method invokedMethod, Object[] arguments) {
     String methodName = invokedMethod.getName();
     String attachedClassName = mock.getClass().getName();
-    OngoingStubbing invocationDetail = new OngoingStubbing(attachedClassName, methodName, arguments);
-    if (!recordedInvocationDetails.contains(invocationDetail)) {
-      recordedInvocationDetails.add(invocationDetail);
+    OngoingStubbing ongoingStubbing = new OngoingStubbing(attachedClassName, methodName, arguments);
+    if (!ongoingStubbingList.contains(ongoingStubbing)) {
+      ongoingStubbingList.add(ongoingStubbing);
       Type type = invokedMethod.getReturnType();
       if(type.getTypeName().equals(BYTE)
               ||type.getTypeName().equals(SHORT)
@@ -45,9 +45,9 @@ public class SMockInterceptor {
       }
       return null;
     } else {
-      int index = recordedInvocationDetails.indexOf(invocationDetail);
-      OngoingStubbing recordedBehaviourDetail = recordedInvocationDetails.get(index);
-      return recordedBehaviourDetail.getResult();
+      int index = ongoingStubbingList.indexOf(ongoingStubbing);
+      OngoingStubbing recordedOngoingStubbing = ongoingStubbingList.get(index);
+      return recordedOngoingStubbing.getResult();
     }
   }
 

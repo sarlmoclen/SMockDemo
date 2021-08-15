@@ -23,7 +23,7 @@ public class ByteBuddySMockCreator implements SMockCreator {
             //指定父类
             .subclass(classToMock)
             //指定所有方法都需要拦截
-            .method(ElementMatchers.named("add"))
+            .method(ElementMatchers.any())
             //委托InterceptorDelegate.class处理拦截的方法
             .intercept(MethodDelegation.to(InterceptorDelegate.class))
             //定义字段“interceptor”，类型是SMockInterceptor.class，private
@@ -39,9 +39,9 @@ public class ByteBuddySMockCreator implements SMockCreator {
               .load(getClass().getClassLoader(), Default.WRAPPER)
               //获得class对象
               .getLoaded();
-    T mockTargetInstance = (T) new ObjenesisStd().newInstance(classWithInterceptor);
-    ((SMockIntercepable) mockTargetInstance).setInterceptor(new SMockInterceptor(ongoingStubbingList));
-    return mockTargetInstance;
+    T mockInstance = (T) new ObjenesisStd().newInstance(classWithInterceptor);
+    ((SMockIntercepable) mockInstance).setInterceptor(new SMockInterceptor(ongoingStubbingList));
+    return mockInstance;
   }
 
   private static void outputClazz(byte[] bytes) {
