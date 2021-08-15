@@ -1,6 +1,6 @@
 package com.sarlmoclen.smock;
 
-public interface SMockIntercepable {
+public interface SMockIntercept {
 
   void setInterceptor(SMockInterceptor interceptor);
 

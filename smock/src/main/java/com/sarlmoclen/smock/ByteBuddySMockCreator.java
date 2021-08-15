@@ -29,7 +29,7 @@ public class ByteBuddySMockCreator implements SMockCreator {
             //定义字段“interceptor”，类型是SMockInterceptor.class，private
             .defineField("interceptor", SMockInterceptor.class, Modifier.PRIVATE)
             //继承接口
-            .implement(SMockIntercepable.class)
+            .implement(SMockIntercept.class)
             .intercept(FieldAccessor.ofBeanProperty())
             //产生字节码
             .make();
@@ -40,7 +40,7 @@ public class ByteBuddySMockCreator implements SMockCreator {
               //获得class对象
               .getLoaded();
     T mockInstance = (T) new ObjenesisStd().newInstance(classWithInterceptor);
-    ((SMockIntercepable) mockInstance).setInterceptor(new SMockInterceptor(ongoingStubbingList));
+    ((SMockIntercept) mockInstance).setInterceptor(new SMockInterceptor(ongoingStubbingList));
     return mockInstance;
   }
 
