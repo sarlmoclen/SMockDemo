@@ -21,4 +21,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'net.bytebuddy:byte-buddy:1.11.12'
     implementation 'net.bytebuddy:byte-buddy-agent:1.11.12'
+    implementation 'org.objenesis:objenesis:3.1'
 }

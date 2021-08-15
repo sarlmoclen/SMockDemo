@@ -1,17 +1,30 @@
-//package com.sarlmoclen.smockdemo;
-//
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.Mockito;
-//import org.mockito.junit.MockitoJUnitRunner;
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class UtilsTest {
-//
-//    @Test
-//    public void testAdd(){
-//        Utils utils = Mockito.mock(Utils.class);
-//        Mockito.when(utils.add(1,2)).thenReturn(5);
-//    }
-//
-//}
+package com.sarlmoclen.smockdemo;
+
+import com.sarlmoclen.smock.SMock;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
+public class UtilsTest {
+
+    @Test
+    public void testAdd_mockito(){
+        Utils utils = Mockito.mock(Utils.class);
+        utils.add(1,2);
+        Mockito.when(1).thenReturn(6);
+        Assert.assertEquals(6,utils.add(1,2));
+    }
+
+    @Test
+    public void testAdd_smock(){
+        Utils utils = SMock.mock(Utils.class);
+        utils.add(1,2);
+        SMock.when(1).thenReturn(6);
+        Assert.assertEquals(6,utils.add(1,2));
+    }
+
+}
