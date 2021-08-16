@@ -14,8 +14,8 @@ public class InterceptorDelegate {
   public static Object intercept(@This Object mock,
                                  @Origin Method invokedMethod,
                                  @FieldValue("interceptor") SMockInterceptor interceptor,
-                                 @AllArguments Object[] arguments) {
-    return interceptor.invoke(mock, invokedMethod, arguments);
+                                 @AllArguments Object[] args) {
+    return interceptor.invoke(mock, invokedMethod, args);
   }
 
 }

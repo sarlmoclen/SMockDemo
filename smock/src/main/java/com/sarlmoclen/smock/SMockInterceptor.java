@@ -20,10 +20,10 @@ public class SMockInterceptor {
     this.ongoingStubbingList = ongoingStubbingList;
   }
 
-  public Object invoke(Object mock, Method invokedMethod, Object[] arguments) {
+  public Object invoke(Object mock, Method invokedMethod, Object[] args) {
     String methodName = invokedMethod.getName();
-    String attachedClassName = mock.getClass().getName();
-    OngoingStubbing ongoingStubbing = new OngoingStubbing(attachedClassName, methodName, arguments);
+    String className = mock.getClass().getName();
+    OngoingStubbing ongoingStubbing = new OngoingStubbing(className, methodName, args);
     if (!ongoingStubbingList.contains(ongoingStubbing)) {
       ongoingStubbingList.add(ongoingStubbing);
       Type type = invokedMethod.getReturnType();
