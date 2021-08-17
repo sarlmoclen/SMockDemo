@@ -1,5 +1,7 @@
 package com.sarlmoclen.smock;
 
+import android.annotation.SuppressLint;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -20,6 +22,7 @@ public class SMockInterceptor {
     this.ongoingStubbingList = ongoingStubbingList;
   }
 
+  @SuppressLint("NewApi")
   public Object invoke(Object mock, Method invokedMethod, Object[] args) {
     String methodName = invokedMethod.getName();
     String className = mock.getClass().getName();
